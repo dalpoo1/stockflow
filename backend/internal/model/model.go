@@ -9,19 +9,19 @@ type Product struct {
 	Name           string     `json:"name"`
 	Price          int        `json:"price"`
 	Stock          int        `json:"stock"`
-	IsActive       bool       `json:"isActive"`
-	CreatedAt      time.Time  `json:"createdAt"`
-	LastMovementAt *time.Time `json:"lastMovementAt"`
+	IsActive       bool       `json:"is_active"`
+	CreatedAt      time.Time  `json:"created_at"`
+	LastMovementAt *time.Time `json:"last_movement_at"`
 }
 
 // StockMovement is an immutable ledger entry. History is never deleted.
 type StockMovement struct {
 	ID        int       `json:"id"`
-	ProductID int       `json:"productId"`
+	ProductID int       `json:"product_id"`
 	Type      string    `json:"type"`
 	Qty       int       `json:"qty"`
 	Note      *string   `json:"note"`
-	CreatedAt time.Time `json:"createdAt"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // Order is a sales order. Status is CREATED or CANCELLED.
@@ -30,8 +30,8 @@ type Order struct {
 	Customer    string      `json:"customer"`
 	Status      string      `json:"status"`
 	Total       int         `json:"total"`
-	CreatedAt   time.Time   `json:"createdAt"`
-	CancelledAt *time.Time  `json:"cancelledAt"`
+	CreatedAt   time.Time   `json:"created_at"`
+	CancelledAt *time.Time  `json:"cancelled_at"`
 	Items       []OrderItem `json:"items"`
 }
 
@@ -40,13 +40,13 @@ type OrderItem struct {
 	ID        int    `json:"id"`
 	SKU       string `json:"sku"`
 	Qty       int    `json:"qty"`
-	UnitPrice int    `json:"unitPrice"`
+	UnitPrice int    `json:"unit_price"`
 }
 
 // Summary is the dashboard summary, derived from the products table.
 type Summary struct {
-	TotalProducts   int `json:"totalProducts"`
-	ActiveProducts  int `json:"activeProducts"`
-	TotalStockValue int `json:"totalStockValue"`
-	LowStockCount   int `json:"lowStockCount"`
+	TotalProducts   int `json:"total_products"`
+	ActiveProducts  int `json:"active_products"`
+	TotalStockValue int `json:"total_stock_value"`
+	LowStockCount   int `json:"low_stock_count"`
 }

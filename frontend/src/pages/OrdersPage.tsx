@@ -90,7 +90,7 @@ export default function OrdersPage() {
                       {formatIDR(o.total)}
                     </td>
                     <td className="px-4 py-3 text-gray-500">
-                      {new Date(o.createdAt).toLocaleDateString('id-ID')}
+                      {new Date(o.created_at).toLocaleDateString('id-ID')}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <Link

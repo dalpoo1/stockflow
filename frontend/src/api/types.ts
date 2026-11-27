@@ -6,20 +6,20 @@ export interface Product {
   name: string
   price: number
   stock: number
-  isActive: boolean
-  createdAt: string
-  lastMovementAt: string | null
+  is_active: boolean
+  created_at: string
+  last_movement_at: string | null
 }
 
 export type MovementType = 'in' | 'out'
 
 export interface StockMovement {
   id: number
-  productId: number
+  product_id: number
   type: MovementType
   qty: number
   note: string | null
-  createdAt: string
+  created_at: string
 }
 
 export type OrderStatus = 'CREATED' | 'CANCELLED'
@@ -28,7 +28,7 @@ export interface OrderItem {
   id: number
   sku: string
   qty: number
-  unitPrice: number
+  unit_price: number
 }
 
 export interface Order {
@@ -36,16 +36,16 @@ export interface Order {
   customer: string
   status: OrderStatus
   total: number
-  createdAt: string
-  cancelledAt: string | null
+  created_at: string
+  cancelled_at: string | null
   items: OrderItem[]
 }
 
 export interface Summary {
-  totalProducts: number
-  activeProducts: number
-  totalStockValue: number
-  lowStockCount: number
+  total_products: number
+  active_products: number
+  total_stock_value: number
+  low_stock_count: number
 }
 
 export interface Paginated<T> {
@@ -83,5 +83,5 @@ export interface ProductUpdateInput {
   sku?: string
   name?: string
   price?: number
-  isActive?: boolean
+  is_active?: boolean
 }

@@ -9,13 +9,13 @@ export default function SummaryCards({
   loading: boolean
 }) {
   const cards = [
-    { label: 'Total products', value: summary ? String(summary.totalProducts) : undefined },
-    { label: 'Active products', value: summary ? String(summary.activeProducts) : undefined },
+    { label: 'Total products', value: summary ? String(summary.total_products) : undefined },
+    { label: 'Active products', value: summary ? String(summary.active_products) : undefined },
     {
       label: 'Total stock value',
-      value: summary ? formatIDR(summary.totalStockValue) : undefined,
+      value: summary ? formatIDR(summary.total_stock_value) : undefined,
     },
-    { label: 'Low stock (≤ 10)', value: summary ? String(summary.lowStockCount) : undefined },
+    { label: 'Low stock (≤ 10)', value: summary ? String(summary.low_stock_count) : undefined },
   ]
 
   return (

@@ -10,6 +10,7 @@ export const queryKeys = {
       params,
     ],
     options: ['products', 'options'],
+    movements: (id: number) => ['products', id, 'movements'],
   },
   summary: ['summary'],
   orders: {

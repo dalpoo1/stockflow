@@ -6,12 +6,14 @@ export default function ProductTable({
   products,
   deletingId,
   onAdjust,
+  onHistory,
   onEdit,
   onDelete,
 }: {
   products: Product[]
   deletingId: number | null
   onAdjust: (p: Product) => void
+  onHistory: (p: Product) => void
   onEdit: (p: Product) => void
   onDelete: (p: Product) => void
 }) {
@@ -41,9 +43,9 @@ export default function ProductTable({
                 </span>
               </td>
               <td className="px-4 py-3">
-                <StatusBadge isActive={p.isActive} />
+                <StatusBadge isActive={p.is_active} />
               </td>
-              <td className="px-4 py-3 text-gray-500">{formatTimeAgo(p.lastMovementAt)}</td>
+              <td className="px-4 py-3 text-gray-500">{formatTimeAgo(p.last_movement_at)}</td>
               <td className="px-4 py-3">
                 <div className="flex justify-end gap-2">
                   <button
@@ -57,6 +59,12 @@ export default function ProductTable({
                     className="rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
                   >
                     Adjust
+                  </button>
+                  <button
+                    onClick={() => onHistory(p)}
+                    className="rounded-md border border-gray-300 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50"
+                  >
+                    History
                   </button>
                   <button
                     onClick={() => onDelete(p)}

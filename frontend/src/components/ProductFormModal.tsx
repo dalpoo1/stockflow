@@ -22,7 +22,7 @@ export default function ProductFormModal({
   const [sku, setSku] = useState(product?.sku ?? '')
   const [name, setName] = useState(product?.name ?? '')
   const [price, setPrice] = useState(product ? String(product.price) : '')
-  const [isActive, setIsActive] = useState(product?.isActive ?? true)
+  const [isActive, setIsActive] = useState(product?.is_active ?? true)
   const [fieldErrors, setFieldErrors] = useState<ReturnType<typeof validateProduct>>({})
   const [serverError, setServerError] = useState<string | null>(null)
 
@@ -33,7 +33,7 @@ export default function ProductFormModal({
             sku: sku.trim(),
             name: name.trim(),
             price: Number(price),
-            isActive,
+            is_active: isActive,
           })
         : api.createProduct({ sku: sku.trim(), name: name.trim(), price: Number(price) }),
     onSuccess: () => onSuccess(),

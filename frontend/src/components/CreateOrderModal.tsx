@@ -117,7 +117,7 @@ export default function CreateOrderModal({
                 <span>
                   {it.sku} × {it.qty}
                 </span>
-                <span className="text-gray-600">{formatIDR(it.unitPrice * it.qty)}</span>
+                <span className="text-gray-600">{formatIDR(it.unit_price * it.qty)}</span>
               </li>
             ))}
           </ul>
@@ -196,7 +196,7 @@ export default function CreateOrderModal({
                       {products.map((p) => (
                         <option key={p.sku} value={p.sku}>
                           {p.sku} — {p.name} (stock {p.stock})
-                          {p.isActive ? '' : ' · inactive'}
+                          {p.is_active ? '' : ' · inactive'}
                         </option>
                       ))}
                     </select>
@@ -220,7 +220,7 @@ export default function CreateOrderModal({
                   {selected && (
                     <p className="mt-1 text-xs text-gray-500">
                       {formatIDR(selected.price)} each · {selected.stock} in stock
-                      {selected.isActive ? '' : ' · inactive'}
+                      {selected.is_active ? '' : ' · inactive'}
                     </p>
                   )}
                   {(fieldErrors.itemErrors?.[i]?.sku || serverItemErrors[item.sku.trim()]) && (

@@ -12,8 +12,8 @@ describe('formatIDR', () => {
 describe('formatTimeAgo', () => {
   const now = new Date('2026-11-06T12:00:00Z').getTime()
 
-  it('returns an em dash for null/absent timestamps', () => {
-    expect(formatTimeAgo(null, now)).toBe('—')
+  it('returns "Never" for null/absent timestamps', () => {
+    expect(formatTimeAgo(null, now)).toBe('Never')
   })
 
   it('returns "just now" under a minute', () => {

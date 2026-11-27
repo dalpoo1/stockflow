@@ -5,9 +5,9 @@ export function formatIDR(amount: number): string {
 }
 
 export function formatTimeAgo(iso: string | null, now: number = Date.now()): string {
-  if (!iso) return '—'
+  if (!iso) return 'Never'
   const then = new Date(iso).getTime()
-  if (Number.isNaN(then)) return '—'
+  if (Number.isNaN(then)) return 'Never'
 
   const diff = Math.max(0, now - then)
   const sec = Math.floor(diff / 1000)

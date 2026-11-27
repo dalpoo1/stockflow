@@ -9,6 +9,7 @@ import { errorMessage } from '../utils/errorMessage'
 import AdjustStockModal from '../components/AdjustStockModal'
 import EmptyState from '../components/EmptyState'
 import ErrorState from '../components/ErrorState'
+import MovementHistoryModal from '../components/MovementHistoryModal'
 import ProductFormModal from '../components/ProductFormModal'
 import ProductTable from '../components/ProductTable'
 import Spinner from '../components/Spinner'
@@ -28,6 +29,7 @@ export default function ProductsPage() {
   const [page, setPage] = useState(1)
 
   const [adjusting, setAdjusting] = useState<Product | null>(null)
+  const [historyProduct, setHistoryProduct] = useState<Product | null>(null)
   const [editing, setEditing] = useState<Product | null>(null)
   const [showCreate, setShowCreate] = useState(false)
   const [deletingId, setDeletingId] = useState<number | null>(null)
@@ -142,6 +144,7 @@ export default function ProductsPage() {
             products={data.data}
             deletingId={deletingId}
             onAdjust={setAdjusting}
+            onHistory={setHistoryProduct}
             onEdit={setEditing}
             onDelete={onDelete}
           />
@@ -177,6 +180,12 @@ export default function ProductsPage() {
             setAdjusting(null)
             invalidate()
           }}
+        />
+      )}
+      {historyProduct && (
+        <MovementHistoryModal
+          product={historyProduct}
+          onClose={() => setHistoryProduct(null)}
         />
       )}
       {editing && (

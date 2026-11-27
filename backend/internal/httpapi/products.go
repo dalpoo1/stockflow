@@ -124,7 +124,7 @@ type updateProductReq struct {
 	SKU      *string `json:"sku"`
 	Name     *string `json:"name"`
 	Price    *int    `json:"price"`
-	IsActive *bool   `json:"isActive"`
+	IsActive *bool   `json:"is_active"`
 }
 
 // updateProduct handles PUT /api/products/{id}

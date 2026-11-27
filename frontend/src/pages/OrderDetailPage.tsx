@@ -18,6 +18,7 @@ export default function OrderDetailPage() {
   const queryClient = useQueryClient()
   const [confirming, setConfirming] = useState(false)
   const [actionError, setActionError] = useState<string | null>(null)
+  const [cancelSuccess, setCancelSuccess] = useState(false)
 
   const orderQuery = useQuery({
     queryKey: queryKeys.orders.detail(orderId),
@@ -30,13 +31,17 @@ export default function OrderDetailPage() {
     onSuccess: () => {
       setConfirming(false)
       setActionError(null)
+      setCancelSuccess(true)
       // Stock is restored server-side; refresh products + summary + orders.
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.detail(orderId) })
       queryClient.invalidateQueries({ queryKey: queryKeys.orders.all })
       queryClient.invalidateQueries({ queryKey: queryKeys.products.all })
       queryClient.invalidateQueries({ queryKey: queryKeys.summary })
     },
-    onError: (err) => setActionError(errorMessage(err)),
+    onError: (err) => {
+      setCancelSuccess(false)
+      setActionError(errorMessage(err))
+    },
   })
 
   if (!valid) {
@@ -67,11 +72,23 @@ export default function OrderDetailPage() {
           </Link>
           <h1 className="text-2xl font-semibold text-gray-900">Order #{order.id}</h1>
           <p className="text-sm text-gray-500">
-            {order.customer} · {new Date(order.createdAt).toLocaleString('id-ID')}
+            {order.customer} · Created {new Date(order.created_at).toLocaleString('id-ID')}
+          </p>
+          <p className="text-xs text-gray-500">
+            Cancelled:{' '}
+            {order.cancelled_at
+              ? new Date(order.cancelled_at).toLocaleString('id-ID')
+              : '—'}
           </p>
         </div>
         <OrderStatusBadge status={order.status} />
       </div>
+
+      {cancelSuccess && (
+        <div className="rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800">
+          Order cancelled and stock has been restored.
+        </div>
+      )}
 
       {actionError && (
         <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
@@ -93,10 +110,10 @@ export default function OrderDetailPage() {
             {order.items.map((it) => (
               <tr key={it.id}>
                 <td className="px-4 py-3 font-mono text-xs text-gray-700">{it.sku}</td>
-                <td className="px-4 py-3 text-right text-gray-700">{formatIDR(it.unitPrice)}</td>
+                <td className="px-4 py-3 text-right text-gray-700">{formatIDR(it.unit_price)}</td>
                 <td className="px-4 py-3 text-right text-gray-700">{it.qty}</td>
                 <td className="px-4 py-3 text-right font-medium text-gray-900">
-                  {formatIDR(it.unitPrice * it.qty)}
+                  {formatIDR(it.unit_price * it.qty)}
                 </td>
               </tr>
             ))}
